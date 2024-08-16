@@ -10,6 +10,8 @@ export default defineConfig({
   resolve: {
     alias: {
       utils: '/src/utils',
+      components: '/src/components',
+      pages: '/src/pages',
     },
   },
 });
