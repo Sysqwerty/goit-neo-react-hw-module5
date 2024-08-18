@@ -1,11 +1,18 @@
 import { HiSearch } from 'react-icons/hi';
+import { errorToast } from 'utils/toasts';
 import css from './SearchForm.module.css';
 
 const SearchForm = ({ onSearchSubmit }) => {
   const handleSubmit = async e => {
     e.preventDefault();
     const form = e.currentTarget;
-    onSearchSubmit(form.elements.query.value.trim());
+    const query = form.elements.query.value.trim();
+
+    if (!query) {
+      errorToast('Please enter a search query');
+    }
+
+    onSearchSubmit(query);
     form.reset();
   };
 

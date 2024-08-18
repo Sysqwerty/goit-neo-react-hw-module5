@@ -7,11 +7,17 @@ import css from './MovieCast.module.css';
 const MovieCast = () => {
   const { movieId } = useParams();
   const [movieCredits, setMovieCredits] = useState(null);
+  const [notFound, setNotFound] = useState(false);
 
   useEffect(() => {
+    setNotFound(false);
     const fetchMovieCredits = async () => {
       try {
         const data = await getMovieCredits(movieId);
+        if (data.length === 0) {
+          setNotFound(true);
+          return;
+        }
         setMovieCredits(data);
       } catch (err) {
         errorToast(
@@ -25,7 +31,7 @@ const MovieCast = () => {
 
   return (
     <div>
-      {movieCredits?.length > 0 ? (
+      {movieCredits?.length > 0 && (
         <ul className={css.castList}>
           {movieCredits.map(({ id, profile_path, name, character }) => (
             <li key={id} className={css.castItem}>
@@ -45,9 +51,8 @@ const MovieCast = () => {
             </li>
           ))}
         </ul>
-      ) : (
-        <p>We don&apos;t have list of cast for that movie.</p>
       )}
+      {notFound && <p>We don&apos;t have list of cast for that movie.</p>}
     </div>
   );
 };

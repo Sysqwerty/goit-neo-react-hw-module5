@@ -11,6 +11,7 @@ const MoviesPage = () => {
   const [movies, setMovies] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [searchParams, setSearchParams] = useSearchParams();
+  const [notFound, setNotFound] = useState(false);
   const query = searchParams.get('query') ?? '';
 
   const handleSearch = query => {
@@ -19,6 +20,7 @@ const MoviesPage = () => {
   };
 
   useEffect(() => {
+    setNotFound(false);
     if (!query) {
       return;
     }
@@ -26,6 +28,7 @@ const MoviesPage = () => {
       try {
         setIsLoading(true);
         const data = await getMovieByTitle(query);
+        data.length === 0 ? setNotFound(true) : setNotFound(false);
         setMovies(data);
       } catch (err) {
         errorToast(
@@ -43,6 +46,7 @@ const MoviesPage = () => {
       <SearchForm onSearchSubmit={handleSearch} />
       {isLoading && <Loader />}
       {movies.length > 0 && <MovieList movies={movies} />}
+      {notFound && <p>No movies found</p>}
     </main>
   );
 };

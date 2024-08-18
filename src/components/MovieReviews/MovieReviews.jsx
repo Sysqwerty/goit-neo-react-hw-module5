@@ -8,11 +8,17 @@ import css from './MovieReviews.module.css';
 const MovieReviews = () => {
   const { movieId } = useParams();
   const [movieReviews, setMovieReviews] = useState(null);
+  const [notFound, setNotFound] = useState(false);
 
   useEffect(() => {
+    setNotFound(false);
     const fetchMovieReviews = async () => {
       try {
         const data = await getMovieReviews(movieId);
+        if (data.length === 0) {
+          setNotFound(true);
+          return;
+        }
         setMovieReviews(data);
       } catch (err) {
         errorToast(
@@ -26,7 +32,7 @@ const MovieReviews = () => {
 
   return (
     <div>
-      {movieReviews?.length > 0 ? (
+      {movieReviews?.length > 0 && (
         <ul className={css.reviewList}>
           {movieReviews.map(({ id, author, content }) => (
             <li key={id} className={css.reviewItem}>
@@ -35,9 +41,8 @@ const MovieReviews = () => {
             </li>
           ))}
         </ul>
-      ) : (
-        <p>We don&apos;t have any reviews for that movie.</p>
       )}
+      {notFound && <p>We don&apos;t have any reviews for that movie.</p>}
     </div>
   );
 };
