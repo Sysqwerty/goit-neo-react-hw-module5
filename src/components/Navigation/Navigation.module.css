@@ -1,0 +1,51 @@
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  position: sticky;
+  top: 0;
+  z-index: 111;
+  padding: 8px 0;
+  margin-bottom: 16px;
+  border-bottom: 1px solid var(--secondary-color);
+  background-color: var(--primary-color);
+}
+
+.nav {
+  display: flex;
+}
+
+.logo {
+  font-weight: 700;
+  margin: 0;
+  text-decoration: none;
+  color: var(--secondary-color);
+}
+
+.icon {
+  display: inline-block;
+  vertical-align: middle;
+  width: 24px;
+  height: 24px;
+  margin-right: 8px;
+}
+
+.link {
+  padding: 8px 16px;
+  border-radius: 4px;
+  text-decoration: none;
+  color: var(--secondary-color);
+  font-weight: 500;
+}
+
+@media screen and (min-width: 700px) {
+  .header {
+    padding: 8px 0;
+  }
+}
+
+.active {
+  color: var(--primary-color);
+  background-color: var(--accent-color);
+}

@@ -1,0 +1,48 @@
+.container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 260px));
+  justify-content: space-evenly;
+  gap: 16px;
+  margin-top: 20px;
+}
+
+.card {
+  background: var(--secondary-color);
+  border: 1px solid var(--secondary-color);
+  border-radius: 4px;
+  box-shadow: 0 0 10px var(--secondary-color);
+  transition: all 500ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.card:hover {
+  transform: scale(1.03);
+  box-shadow: 0 0 10px var(--accent-color);
+  border: 1px solid var(--accent-color);
+  cursor: pointer;
+  background-color: var(--accent-color);
+  color: var(--primary-color);
+}
+
+.card a {
+  text-decoration: none;
+}
+
+.cardTitle {
+  padding: 4px;
+  text-align: center;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  color: var(--primary-color);
+  transition: all 500ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.card:hover .cardTitle {
+  background-color: var(--accent-color);
+}
+
+.cardImage {
+  height: 300px;
+  width: 100%;
+  object-fit: cover;
+}
